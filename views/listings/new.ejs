@@ -1,26 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roamnest</title>
-</head>
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="row">
+    <div class="col-6 offset-2">
 <body>
+    <br><br>
     <h1>Create a New Listing</h1>
     <form method="POST" action="/listings">
-        <input name="title" placeholder="Enter title" type="text">
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input 
+            name="title" 
+            placeholder="Add a catchy title" 
+            type="text" 
+            class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea 
+            name="description" 
+            placeholder="Enter description" 
+            type="text" 
+            class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image Link</label>
+            <input 
+            name="image" 
+            placeholder="Enter image URL/Link" 
+            type="text"
+            class="form-control">
+        </div>
+        <div class="row">
+        <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input 
+            name="price" 
+            placeholder="1200" 
+            type="number"
+            class="form-control">
+        </div>
+        <div class="mb-3 col-md-8">
+            <label for="location" class="form-label">Location</label>
+            <input 
+            name="location" 
+            placeholder="Jaipur, Rajasthan" 
+            type="text"
+            class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input 
+            name="country" 
+            placeholder="India" 
+            type="text"
+            class="form-control">
+        </div>
+        </div>
+        <br>
+        <button class="btn btn-dark add-btn">Add</button>
         <br><br>
-        <textarea name="description" placeholder="Enter description" type="text"></textarea>
-        <br><br>
-        <input  name="image" placeholder="Enter image URL/Link" type="text">
-        <br><br>
-        <input name="price" placeholder="Enter Price" type="number">
-        <br><br>
-        <input name="location" placeholder="Enter location" type="text">
-        <br><br>
-        <input name="country" placeholder="Enter country" type="text">
-        <br><br>
-        <button>Add</button>
     </form>
 </body>
-</html>
+</div>
+</div>

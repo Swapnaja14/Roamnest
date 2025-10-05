@@ -1,23 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="row">
+    <div class="col-6 offset-2">
 <body>
-        <h3>Create a New Listing</h3>
+        <br><br>
+        <h3>Edit this Listing</h3>
         <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
-            <input name="title" value="<%= listing.title %>" type="text"/>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input 
+                name="title" 
+                value="<%= listing.title %>" 
+                type="text" 
+                class="form-control"/>
+            </div>
+            
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" class="form-control"><%= listing.description %></textarea>
+            </div>
+        
+        <div class="mb-3">    
+                <label for="image" class="form-label">Image Link</label>
+                <input 
+                name="image" 
+                value="<%= listing.image.url %>" 
+                type="text"
+                class="form-control"/>
+            </div>
+
+        <div class="row">
+        <div class="mb-3 col-md-4">    
+                <label for="price" class="form-label">Price</label>
+                <input 
+                name="price" 
+                value="<%= listing.price %>" 
+                type="number"
+                class="form-control"/>
+            </div>
+            
+            <div class="mb-3 col-md-8">
+                <label for="location" class="form-label">Location</label>
+                <input 
+                name="location" 
+                value="<%= listing.location %>" 
+                type="text"  
+                class="form-control"/>
+            </div>
+            
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input 
+                name="country" 
+                value="<%= listing.country %>" 
+                type="text"
+                class="form-control"/>
+            </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark edit-btn">Submit</button>
             <br><br>
-            <textarea name="description"><%= listing.description %></textarea>
-            <br><br>
-            <input name="price" value="<%= listing.price %>" type="number"/>
-            <br><br>
-            <input name="location" value="<%= listing.location %>" type="text"/>
-            <br><br>
-            <input name="country" value="<%= listing.country %>" type="text"/>
-            <button type="submit">Submit</button>
         </form>
 </body>
-</html>
+</div>
+</div>
