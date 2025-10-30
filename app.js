@@ -7,15 +7,16 @@ const path = require("path");
 const ejs = require('ejs');
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync");
 
 app.set("view engine", "ejs");
 app.engine('ejs', ejsMate);
 
 // Middlewares
 app.use(methodOverride("_method")); // To send PUT or DELETE request
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "views")); // To connect with files in views directory
 app.use(express.static(path.join(__dirname, "public"))); // To connect ejs with css
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); // To enable parsing
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/roamnest";
 
@@ -77,9 +78,25 @@ app.get("/listings/:id", async (req, res) => {
 
 // Create Route
 app.post("/listings", async (req, res) => {
-    const newListing = new Listing(req.body);
-    await newListing.save();
-    res.redirect("/listings");
+    try {
+        const {title, description, image, price, location, country} = req.body;
+
+        const newListing = new Listing({
+            title,
+            description,
+            image: {url: image || undefined},
+            price: Number(price),
+            location,
+            country
+        });
+
+        // const newListing = new Listing(req.body);
+        await newListing.save();
+        res.redirect("/listings");
+    }
+    catch(err) {
+        console.log("Error creating listing");
+    }
 });
 
 // Edit Route
@@ -102,4 +119,8 @@ app.delete("/listings/:id", async (req, res) => {
     let deletedListing = await Listing.findByIdAndDelete(id);
     console.log(deletedListing);
     res.redirect("/listings");
+});
+
+app.use((err, req, res, next) => {
+    res.send("something went wrong!");
 });

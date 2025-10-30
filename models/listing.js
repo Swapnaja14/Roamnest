@@ -5,7 +5,7 @@ const listingSchema = new Schema ({
 
     title: {
         type: String,
-        required: true,
+        required: true
     },
 
     description: {
@@ -29,8 +29,15 @@ const listingSchema = new Schema ({
         required: true
     },
 
-    location: String,
-    country: String
+    location: {
+        type: String,
+        required: true
+    },
+
+    country: {
+        type: String,
+        required: true
+    }
 });
 
 const Listing = mongoose.model("Listing", listingSchema);
